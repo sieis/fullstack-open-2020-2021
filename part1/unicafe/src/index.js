@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Statistic = (props) => <p>{props.text}: {props.value}</p>
+const Statistic = (props) => <><td>{props.text}</td><td>{props.value}</td></>
 
 const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
+  <button className='button' onClick={props.handleClick}>{props.text}</button>
 )
 
 const Statistics = (props) => {
   if (props.allValue) {
-    console.log(props.all.length)
     return (
       <>
-        <Statistic text={props.good} value={props.goodValue} />
-        <Statistic text={props.neutral} value={props.neutralValue} />
-        <Statistic text={props.bad} value={props.badValue} />
-        <Statistic text={props.all} value={props.allValue} />
-        <Statistic text={props.positive} value={props.positiveValue} />
+        <table className="table is-striped">
+          <thead>
+            <tr>
+              <th className="is-size-1">statistics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <Statistic text={props.good} value={props.goodValue} />
+            </tr>
+            <tr>
+              <Statistic text={props.neutral} value={props.neutralValue} />
+            </tr>
+            <tr>
+              <Statistic text={props.bad} value={props.badValue} />
+            </tr>
+            <tr>
+              <Statistic text={props.all} value={props.allValue} />
+            </tr>
+            <tr>
+              <Statistic text={props.positive} value={props.positiveValue} />
+            </tr>
+          </tbody>
+        </table>
       </>
     )
   }
-  console.log(props.all)
   return (
     <p>No feedback given</p>
   )
@@ -47,11 +64,10 @@ const App = () => {
 
   return (
     <>
-      <h1>give feedback</h1>
+      <h1 className='is-size-1'>give feedback</h1>
       <Button handleClick={setGoodValue(good + 1)} text='good' />
       <Button handleClick={setNeutralValue(neutral + 1)} text='neutral' />
       <Button handleClick={setBadValue(bad + 1)} text='bad' />
-      <h1>statistics</h1>
       <Statistics good='good' goodValue={good} bad='bad' badValue={bad} neutral='neutral' neutralValue={neutral} all='all' allValue={all} positive='positive' positiveValue={positive} />
     </>
   )
