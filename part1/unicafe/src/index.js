@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-const Display = (props) => <p>{props.text}: {props.value}</p>
+const Statistic = (props) => <p>{props.text}: {props.value}</p>
+
+const Button = (props) => (
+  <button onClick={props.handleClick}>{props.text}</button>
+)
 
 const Statistics = (props) => {
   if (props.allValue) {
     console.log(props.all.length)
     return (
       <>
-        <Display text={props.good} value={props.goodValue} />
-        <Display text={props.neutral} value={props.neutralValue} />
-        <Display text={props.bad} value={props.badValue} />
-        <Display text={props.all} value={props.allValue} />
-        <Display text={props.positive} value={props.positiveValue} />
+        <Statistic text={props.good} value={props.goodValue} />
+        <Statistic text={props.neutral} value={props.neutralValue} />
+        <Statistic text={props.bad} value={props.badValue} />
+        <Statistic text={props.all} value={props.allValue} />
+        <Statistic text={props.positive} value={props.positiveValue} />
       </>
     )
   }
@@ -22,9 +26,6 @@ const Statistics = (props) => {
   )
 }
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
-)
 
 const App = () => {
   const [good, setGood] = useState(0)
