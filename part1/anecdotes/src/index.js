@@ -22,9 +22,11 @@ const App = () => {
 
   const initialVotes = new Array(anecdotes.length).fill(0)
 
-
   const [votes, setVotes] = useState(initialVotes)
 
+  const [highestNow, setHighVote] = useState(0)
+
+  const [highestVote, setHigh] = useState(0)
 
   const [selected, setSelected] = useState(0)
 
@@ -38,21 +40,30 @@ const App = () => {
     const holder = votes
     holder[voteSelected] += 1
     setVotes(holder)
-    console.log('votes now: ', holder)
+    const highestNow = Math.max(...holder)
+    const highestIndex = holder.findIndex(i => i === highestNow)
+    setHighVote(highestNow)
+    setHigh(highestIndex)
+    console.log('highest vote index: ', highestVote)
+    console.log('holder:', holder)
   }
-
 
   return (
     <section className='section'>
+      {/* display current anecdote */}
       <div className='container'>
-        {anecdotes[selected]}
-        <progress className='progress is-small is-primary'>
-        </progress>
+        <h2 className='is-size-2'>Anecdote of the day</h2>
+        <p>{anecdotes[selected]}</p>
           has Votes: {votes[selected]}
       </div>
       <div className='container'>
         <Button handleClick={setNewVote(selected)} text='vote' />
         <Button handleClick={setNewSelected(randomSelected)} text='next anecdote!' />
+        <progress className='progress is-small is-primary'></progress>
+      </div>
+      <div className='container'>
+        <h2 className='is-size-2'>Anecdote with most ({highestNow}) votes:</h2>
+        <p>{anecdotes[highestVote]}</p>
       </div>
     </section>)
 }
