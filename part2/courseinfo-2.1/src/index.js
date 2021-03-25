@@ -1,78 +1,76 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-const Header = ({ course }) => {
-  return (
-    <h1>{course.name}</h1>
-  )
-}
-
-const Total = ({ course }) => {
-  const arr = course.parts.map(part => part.exercises)
-  const sum = arr.reduce((s, p) => s + p)
-  console.log(arr);
-  return (
-    <p>Number of exercises {sum}</p>
-  )
-}
-// const sum = course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises
-
-const Part = ({ name, exercise }) => {
-  return (
-    <p>{name} {exercise}</p>
-  )
-}
+import Course from './components/Course'
 
 
-const Course = ({ course }) => {
+const App = () => {
+  const courses = [
+    {
+      id: 1,
+      name: 'Half Stack application development',
+      parts: [
+        {
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },
+        {
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },
+        {
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },
+        {
+          name: 'Added Part!??',
+          exercises: 15,
+          id: 4
+        }
+      ]
+    },
+    {
+      name: 'Node.js',
+      id: 2,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    },
+    {
+      name: 'Three.js',
+      id: 3,
+      parts: [
+        {
+          name: 'Another one',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Yet Another',
+          exercises: 17,
+          id: 2
+        }
+      ]
+    }
+  ]
   return (
     <>
-      <Header course={course} />
-      <Content course={course} />
-      <Total course={course} />
-    </>
-  )
-}
-
-const Content = ({ course }) => {
-  return (
-    <div>
-      {course.parts.map(part =>
-        <Part key={part.id} name={part.name} exercise={part.exercises} />
+      <h1>Web development curriculum</h1>
+      {courses.map(name =>
+        <Course key={name.id} course={name} />
       )}
-    </div>
-  )
-}
-const App = () => {
-  const course = {
-    id: 1,
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10,
-        id: 1
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7,
-        id: 2
-      },
-      {
-        name: 'State of a component',
-        exercises: 14,
-        id: 3
-      },
-      {
-        name: 'Added Part!??',
-        exercises: 15,
-        id: 4
-      }
-    ]
-  }
-
-  return (
-    <Course course={course} />
+    </>
   )
 }
 
